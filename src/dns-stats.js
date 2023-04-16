@@ -33,7 +33,7 @@ function getDNSStats(domains) {
             domainArr.forEach((elem) => {
                 name += `.${elem}`
                 if (dns.hasOwnProperty(`${name}`)) {
-                    dns[name] ++
+                    dns[name]++
                 } else {
                     dns[name] = 1;
                 }
