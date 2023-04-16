@@ -1,4 +1,5 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const {NotImplementedError} = require('../extensions/index.js');
+const {defineConstants, stringify} = require("mocha/lib/utils");
 
 /**
  * Given an array of domains, return the object with the appearances of the DNS.
@@ -22,11 +23,34 @@ const { NotImplementedError } = require('../extensions/index.js');
  * }
  *
  */
-function getDNSStats(/* domains */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function getDNSStats(domains) {
+    let dns = {};
+
+    if (domains.length !== 0) {
+        domains.forEach(domain => {
+            let domainArr = domain.split(".").reverse();
+            let name = ""
+            domainArr.forEach((elem) => {
+                name += `.${elem}`
+                if (dns.hasOwnProperty(`${name}`)) {
+                    dns[name] ++
+                } else {
+                    dns[name] = 1;
+                }
+            })
+        })
+    }
+
+
+    return dns;
 }
 
+console.log(getDNSStats([
+    'code.yandex.ru',
+    'music.yandex.ru',
+    'yandex.ru'
+]))
+
 module.exports = {
-  getDNSStats
+    getDNSStats
 };
